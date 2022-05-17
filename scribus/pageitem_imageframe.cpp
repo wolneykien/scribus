@@ -159,6 +159,7 @@ void PageItem_ImageFrame::DrawObj_Item(ScPainter *p, const QRectF& /*e*/)
 		}
 		p->translate(m_imageXOffset*m_imageXScale, m_imageYOffset*m_imageYScale);
 		p->rotate(m_imageRotation);
+		p->shear(m_imageSkewX, m_imageSkewY);
 		double mscalex = 1.0 / m_imageXScale;
 		double mscaley = 1.0 / m_imageYScale;
 		p->scale(m_imageXScale, m_imageYScale);
@@ -360,6 +361,7 @@ void PageItem_ImageFrame::handleModeEditKey(QKeyEvent *k, bool& keyRepeat)
 				QTransform cl;
 				cl.translate(imageXOffset()*imageXScale(), imageYOffset()*imageYScale());
 				cl.rotate(imageRotation());
+                cl.shear(imageSkewX(), imageSkewY());
 				cl.scale(imageXScale(), imageYScale());
 				imageClip.map(cl);
 			}

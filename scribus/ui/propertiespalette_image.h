@@ -68,6 +68,8 @@ public slots:
 	void handleUpdateRequest(int updateFlags);
 
 	void showImageRotation(double rot);
+    void showImageSkewX(double skewX);
+    void showImageSkewY(double skewY);
 	void showScaleAndOffset(double scx, double scy, double x, double y);
 
 	void languageChange();
@@ -85,6 +87,7 @@ private slots:
 	void handleLocalScale();
 	void handleLocalDpi();
 	void handleLocalRotation();
+	void handleLocalSkew();
 	void handleScaling();
 
 	void handleXScale();

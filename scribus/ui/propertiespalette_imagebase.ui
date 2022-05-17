@@ -68,6 +68,40 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="imageSkewXLabel">
+       <property name="text">
+        <string>Hor. skew:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="ScrSpinBox" name="imageSkewX">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="imageSkewYLabel">
+       <property name="text">
+        <string>Vert. skew:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="ScrSpinBox" name="imageSkewY">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="imagePageNumberLabel">
        <property name="text">
@@ -478,6 +512,8 @@
   <tabstop>imageXOffsetSpinBox</tabstop>
   <tabstop>imageYOffsetSpinBox</tabstop>
   <tabstop>imageRotation</tabstop>
+  <tabstop>imageSkewX</tabstop>
+  <tabstop>imageSkewY</tabstop>
   <tabstop>freeScale</tabstop>
   <tabstop>imageXScaleSpinBox</tabstop>
   <tabstop>imageYScaleSpinBox</tabstop>

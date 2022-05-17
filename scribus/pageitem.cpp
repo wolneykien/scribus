@@ -342,6 +342,8 @@ PageItem::PageItem(const PageItem & other)
 	m_imageXOffset(other.m_imageXOffset),
 	m_imageYOffset(other.m_imageYOffset),
 	m_imageRotation(other.m_imageRotation),
+    m_imageSkewX(other.m_imageSkewX),
+    m_imageSkewY(other.m_imageSkewY),
 	m_firstLineOffset(other.m_firstLineOffset),
 	m_groupClips(other.m_groupClips),
 	m_startArrowIndex(other.m_startArrowIndex),
@@ -990,6 +992,27 @@ void PageItem::setImageRotation(const double newRotation)
 		undoManager->action(this, ss);
 	}
 	m_imageRotation = newRotation;
+	if (m_Doc->isLoading())
+		return;
+	checkChanges();
+}
+
+void PageItem::setImageSkew(const double newSkewX, const double newSkewY)
+{
+	if (m_imageSkewX == newSkewX && m_imageSkewY == newSkewY)
+		return;
+	if (UndoManager::undoEnabled())
+	{
+		auto *ss = new SimpleState(Um::Skew, QString(), Um::ISkew);
+		ss->set("IMAGE_SKEW");
+		ss->set("OLD_SKEWX", m_imageSkewX);
+		ss->set("NEW_SKEWX", newSkewX);
+		ss->set("OLD_SKEWY", m_imageSkewY);
+		ss->set("NEW_SKEWY", newSkewY);
+		undoManager->action(this, ss);
+	}
+	m_imageSkewX = newSkewX;
+	m_imageSkewY = newSkewY;
 	if (m_Doc->isLoading())
 		return;
 	checkChanges();
@@ -6281,6 +6304,20 @@ void PageItem::restoreImageRotation(SimpleState *is, bool isUndo)
 		m_imageRotation = is->getInt("NEW_ROT");
 }
 
+void PageItem::restoreImageSkew(SimpleState *is, bool isUndo)
+{
+	if (isUndo)
+    {
+		m_imageSkewX = is->getInt("OLD_SKEWX");
+		m_imageSkewY = is->getInt("OLD_SKEWY");
+	}
+    else
+    {
+		m_imageSkewX = is->getInt("NEW_SKEWX");
+		m_imageSkewY = is->getInt("NEW_SKEWY");
+    }
+}
+
 void PageItem::restorePasteInline(SimpleState *is, bool isUndo)
 {
 	int start = is->getInt("START");
@@ -9589,11 +9626,14 @@ void PageItem::adjustPictScale()
 	double imgXOffs = m_imageXOffset;
 	double imgYOffs = m_imageYOffset; 
 	double imageRot = fmod(m_imageRotation, 360);
-	if (imageRot != 0.0)
+    double imageSkewX = fmod(m_imageSkewX, 360);
+    double imageSkewY = fmod(m_imageSkewY, 360);
+	if (imageRot != 0.0 || imageSkewX != 0.0 || imageSkewY != 0.0)
 	{
 		QRectF br(0, 0, OrigW, OrigH);
 		QTransform m;
 		m.rotate(m_imageRotation);
+        m.shear(m_imageSkewX, m_imageSkewY);
 		br = m.mapRect(br);
 		xs = m_width / br.width();
 		ys = m_height / br.height();
@@ -9604,6 +9644,7 @@ void PageItem::adjustPictScale()
 		QTransform mm;
 		mm.scale(xs2, ys2);
 		mm.rotate(-m_imageRotation);
+		mm.shear(-m_imageSkewX, -m_imageSkewY);
 		hL = mm.map(hL);
 		wL = mm.map(wL);
 		xs = wL.length() / static_cast<double>(OrigW);
@@ -9619,12 +9660,13 @@ void PageItem::adjustPictScale()
 		m_imageXScale = xs;
 		m_imageYScale = ys;
 	}
-	if (imageRot != 0.0)
+	if (imageRot != 0.0 || imageSkewX != 0.0 || imageSkewY != 0.0)
 	{
 		QRectF br(0, 0, OrigW * xs, OrigH * ys);
 		QTransform m;
 		m.scale(1.0 / xs, 1.0 / ys);
 		m.rotate(m_imageRotation);
+        m.shear(m_imageSkewX, m_imageSkewY);
 		br = m.mapRect(br);
 		m_imageXOffset = -br.x();
 		m_imageYOffset = -br.y();
@@ -10045,6 +10087,7 @@ void PageItem::moveImageInFrame(double newX, double newY)
 		QTransform cl;
 		cl.translate(imageXOffset() * imageXScale(), imageYOffset() * imageYScale());
 		cl.rotate(imageRotation());
+        cl.shear(imageSkewX, imageSkewY);
 		cl.scale(imageXScale(), imageYScale());
 		imageClip.map(cl);
 	}

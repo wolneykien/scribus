@@ -106,6 +106,10 @@ grammar {
                         attribute LOCALY { xsd:double },
                         [ impl:name="LocalRot" impl:getter="imageRotation" impl:setter="setImageRotation"]
                         attribute LOCALROT { xsd:double },
+                        [ impl:name="LocalSkewX" impl:getter="imageSkewX" impl:setter="setImageSkewX"]
+                        attribute LOCALSKEWX { xsd:double },
+                        [ impl:name="LocalSkewY" impl:getter="imageSkewY" impl:setter="setImageSkewY"]
+                        attribute LOCALSKEWY { xsd:double },
                         [impl:name="PicArt" impl:getter="imageShown" impl:setter="setImageShown"]
                         attribute PICART { xsd:boolean },
                         [impl:name="ScaleType"]

@@ -334,6 +334,7 @@ void ExtImageProps::leaveOK()
 			QTransform cl;
 			cl.translate(m_item->imageXOffset()*m_item->imageXScale(), m_item->imageYOffset()*m_item->imageYScale());
 			cl.rotate(m_item->imageRotation());
+			cl.shear(m_item->imageSkewX(), m_item->imageSkewY());
 			cl.scale(m_item->imageXScale(), m_item->imageYScale());
 			m_item->imageClip.map(cl);
 		}
@@ -374,6 +375,7 @@ void ExtImageProps::changePreview()
 				QTransform cl;
 				cl.translate(m_item->imageXOffset()*m_item->imageXScale(), m_item->imageYOffset()*m_item->imageYScale());
 				cl.rotate(m_item->imageRotation());
+                cl.shear(m_item->imageSkewX(), m_item->imageSkewY());
 				cl.scale(m_item->imageXScale(), m_item->imageYScale());
 				m_item->imageClip.map(cl);
 			}
@@ -498,6 +500,7 @@ void ExtImageProps::selPath(QListWidgetItem *c)
 		QTransform cl;
 		cl.translate(m_item->imageXOffset()*m_item->imageXScale(), m_item->imageYOffset()*m_item->imageYScale());
 		cl.rotate(m_item->imageRotation());
+        cl.shear(m_item->imageSkewX(), m_item->imageSkewY());
 		cl.scale(m_item->imageXScale(), m_item->imageYScale());
 		m_item->imageClip.map(cl);
 		m_item->update();

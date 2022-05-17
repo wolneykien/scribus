@@ -1298,6 +1298,7 @@ bool PSLib::PS_image(PageItem *item, double x, double y, const QString& fn, doub
 			int h = item->pixm.height();
 			PutStream("0 " + ToStr(h*scaley) + " tr\n");
 			PutStream(ToStr(-item->imageRotation()) + " ro\n");
+            PutStream("[1 " + ToStr(tan(item->imageSkewX())) + ToStr(tan(item->imageSkewY())) + " 1 0 0] concat\n");
 			PutStream("0 " + ToStr(-h*scaley) + " tr\n");
 			if (!Name.isEmpty())
 			{
@@ -1351,6 +1352,7 @@ bool PSLib::PS_image(PageItem *item, double x, double y, const QString& fn, doub
 	PutStream(ToStr(x*scalex) + " " + ToStr(y*scaley) + " tr\n");
 	PutStream("0 " + ToStr(h*scaley) + " tr\n");
 	PutStream(ToStr(-item->imageRotation()) + " ro\n");
+    PutStream("[1 " + ToStr(tan(item->imageSkewX())) + ToStr(tan(item->imageSkewY())) + " 1 0 0] concat\n");
 	PutStream("0 " + ToStr(-h*scaley) + " tr\n");
 	if ((extensionIndicatesPDF(ext)) && (!item->isLatexFrame()))
 	{

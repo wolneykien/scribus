@@ -8749,6 +8749,8 @@ void ScribusMainWindow::slotEditCopyContents()
 	contentsBuffer.LocalX   = imageItem->imageXOffset();
 	contentsBuffer.LocalY   = imageItem->imageYOffset();
 	contentsBuffer.LocalRot = imageItem->imageRotation();
+	contentsBuffer.LocalSkewX = imageItem->imageSkewX();
+	contentsBuffer.LocalSkewY = imageItem->imageSkewY();
 	contentsBuffer.ItemX   = imageItem->xPos();
 	contentsBuffer.ItemY   = imageItem->yPos();
 	contentsBuffer.effects = imageItem->effectsInUse;

@@ -148,6 +148,12 @@
     <attribute name="LOCALROT" impl:name="LocalRot" impl:getter="imageRotation" impl:setter="setImageRotation">
       <data type="double"/>
     </attribute>
+    <attribute name="LOCALSKEWX" impl:name="LocalSkewX" impl:getter="imageSkewX" impl:setter="setImageSkewX">
+      <data type="double"/>
+    </attribute>
+    <attribute name="LOCALSKEWY" impl:name="LocalSkewY" impl:getter="imageSkewY" impl:setter="setImageSkewY">
+      <data type="double"/>
+    </attribute>
     <attribute name="PICART" impl:name="PicArt" impl:getter="imageShown" impl:setter="setImageShown">
       <data type="boolean"/>
     </attribute>

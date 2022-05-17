@@ -11628,6 +11628,7 @@ void ScribusDoc::itemSelection_SetImageOffset(double x, double y, Selection* cus
 			QTransform cl;
 			cl.translate(currItem->imageXOffset()*currItem->imageXScale(), currItem->imageYOffset()*currItem->imageYScale());
 			cl.rotate(currItem->imageRotation());
+            cl.shear(currItem->imageSkewX(), currItem->imageSkewY());
 			cl.scale(currItem->imageXScale(), currItem->imageYScale());
 			currItem->imageClip.map(cl);
 		}
@@ -11666,6 +11667,7 @@ void ScribusDoc::itemSelection_SetImageScale(double x, double y, Selection* cust
 			QTransform cl;
 			cl.translate(currItem->imageXOffset()*currItem->imageXScale(), currItem->imageYOffset()*currItem->imageYScale());
 			cl.rotate(currItem->imageRotation());
+            cl.shear(currItem->imageSkewX(), currItem->imageSkewY());
 			cl.scale(currItem->imageXScale(), currItem->imageYScale());
 			currItem->imageClip.map(cl);
 		}
@@ -11708,6 +11710,7 @@ void ScribusDoc::itemSelection_SetImageScaleAndOffset(double sx, double sy, doub
 			QTransform cl;
 			cl.translate(currItem->imageXOffset()*currItem->imageXScale(), currItem->imageYOffset()*currItem->imageYScale());
 			cl.rotate(currItem->imageRotation());
+            cl.shear(currItem->imageSkewX(), currItem->imageSkewY());
 			cl.scale(currItem->imageXScale(), currItem->imageYScale());
 			currItem->imageClip.map(cl);
 		}
@@ -11744,6 +11747,7 @@ void ScribusDoc::itemSelection_SetImageRotation(double rot, Selection* customSel
 			QTransform cl;
 			cl.translate(currItem->imageXOffset()*currItem->imageXScale(), currItem->imageYOffset()*currItem->imageYScale());
 			cl.rotate(currItem->imageRotation());
+            cl.shear(currItem->imageSkewX(), currItem->imageSkewY());
 			cl.scale(currItem->imageXScale(), currItem->imageYScale());
 			currItem->imageClip.map(cl);
 		}

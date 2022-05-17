@@ -544,6 +544,9 @@ public: // Start public functions
 	void setImageXYOffset(double, double);
 	double imageRotation() const { return m_imageRotation; }
 	void setImageRotation(double newRotation);
+	double imageSkewX() const { return m_imageSkewX; }
+	double imageSkewY() const { return m_imageSkewY; }
+	void setImageSkew(double newSkewX, double newSkewY);
 	//Rounded Corners
 	double cornerRadius() const { return m_roundedCornerRadius; }
 	void setCornerRadius(double);
@@ -1860,6 +1863,8 @@ protected: // Start protected variables
 	double m_imageXOffset {0.0}; ///< Image X Offset to frame
 	double m_imageYOffset {0.0}; ///< Image Y Offset to frame
 	double m_imageRotation {0.0}; ///< Image rotation in frame
+	double m_imageSkewX {0.0}; ///< Image skew rotation X in frame
+	double m_imageSkewY {0.0}; ///< Image skew rotation Y in frame
 	FirstLineOffsetPolicy m_firstLineOffset;
 	bool m_groupClips {true};
 

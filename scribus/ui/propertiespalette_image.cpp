@@ -58,6 +58,16 @@ PropertiesPalette_Image::PropertiesPalette_Image( QWidget* parent) : QWidget(par
 	installSniffer(imageRotation);
 	imageRotationLabel->setBuddy(imageRotation);
 
+    imageSkewX->setWrapping( true );
+	imageSkewX->setNewUnit(6);
+	installSniffer(imageSkewX);
+	imageSkewXLabel->setBuddy(imageSkewX);
+
+    imageSkewY->setWrapping( true );
+	imageSkewY->setNewUnit(6);
+	installSniffer(imageSkewY);
+	imageSkewYLabel->setBuddy(imageSkewY);
+
 	freeScale->setChecked( true );
 	
 	installSniffer(imageXScaleSpinBox);
@@ -93,6 +103,8 @@ PropertiesPalette_Image::PropertiesPalette_Image( QWidget* parent) : QWidget(par
 	connect(imageXOffsetSpinBox, SIGNAL(valueChanged(double)), this, SLOT(handleLocalXY()));
 	connect(imageYOffsetSpinBox, SIGNAL(valueChanged(double)), this, SLOT(handleLocalXY()));
 	connect(imageRotation      , SIGNAL(valueChanged(double)), this, SLOT(handleLocalRotation()));
+	connect(imageSkewX         , SIGNAL(valueChanged(double)), this, SLOT(handleLocalSkew()));
+	connect(imageSkewY         , SIGNAL(valueChanged(double)), this, SLOT(handleLocalSkew()));
 	connect(imgDpiX            , SIGNAL(valueChanged(double)), this, SLOT(handleDpiX()));
 	connect(imgDpiY            , SIGNAL(valueChanged(double)), this, SLOT(handleDpiY()));
 	connect(keepImageWHRatioButton , SIGNAL(clicked())       , this, SLOT(handleImageWHRatio()));
@@ -162,6 +174,9 @@ void PropertiesPalette_Image::setDoc(ScribusDoc *d)
 	imageYOffsetSpinBox->setValues( -16777215, maxXYWHVal, precision, 0);
 
 	imageRotation->setValues( 0, 359.99, 1, 0);
+
+    imageSkewX->setValues( 0, 359.99, 1, 0);
+    imageSkewY->setValues( 0, 359.99, 1, 0);
 
 	imageXScaleSpinBox->setValues( 1, 30000, 2, 1);
 	imageYScaleSpinBox->setValues( 1, 30000, 2, 1);
@@ -333,6 +348,26 @@ void PropertiesPalette_Image::showImageRotation(double rot)
 	imageRotation->showValue(fabs(rrR));
 }
 
+void PropertiesPalette_Image::showImageSkewX(double skewX)
+{
+	if (!m_ScMW || m_ScMW->scriptIsRunning())
+		return;
+	double skX = skewX;
+	if (skewX > 0)
+		skX = 360 - skX;
+	imageSkewX->showValue(fabs(skX));
+}
+
+void PropertiesPalette_Image::showImageSkewY(double skewY)
+{
+	if (!m_ScMW || m_ScMW->scriptIsRunning())
+		return;
+	double skY = skewY;
+	if (skewY > 0)
+		skY = 360 - skY;
+	imageSkewY->showValue(fabs(skY));
+}
+
 void PropertiesPalette_Image::showScaleAndOffset(double scx, double scy, double x, double y)
 {
 	if (!m_ScMW || m_ScMW->scriptIsRunning())
@@ -466,6 +501,8 @@ void PropertiesPalette_Image::setCurrentItem(PageItem *item)
 		imageXOffsetSpinBox->blockSignals(true);
 		imageYOffsetSpinBox->blockSignals(true);
 		imageRotation->blockSignals(true);
+		imageSkewX->blockSignals(true);
+		imageSkewY->blockSignals(true);
 
 		imgEffectsButton->setVisible(m_item->imageIsAvailable && m_item->isRaster);
 		imgExtProperties->setVisible(m_item->imageIsAvailable && m_item->pixm.imgInfo.valid);
@@ -513,6 +550,8 @@ void PropertiesPalette_Image::setCurrentItem(PageItem *item)
 		imageXOffsetSpinBox->blockSignals(false);
 		imageYOffsetSpinBox->blockSignals(false);
 		imageRotation->blockSignals(false);
+		imageRotationX->blockSignals(false);
+		imageRotationY->blockSignals(false);
 	}
 	m_haveItem = true;
 
@@ -521,6 +560,16 @@ void PropertiesPalette_Image::setCurrentItem(PageItem *item)
 	if (m_item->imageRotation() > 0)
 		rrR = 360 - rrR;
 	imageRotation->showValue(fabs(rrR));
+
+	double skX = m_item->imageSkewX();
+	if (m_item->imageSkewX() > 0)
+		skX = 360 - skX;
+	imageSkewX->showValue(fabs(skX));
+
+	double skY = m_item->imageSkewY();
+	if (m_item->imageSkewY() > 0)
+		skY = 360 - skY;
+	imageSkewY->showValue(fabs(skY));
 
 	if (m_item->isImageFrame())
 	{
@@ -578,6 +627,21 @@ void PropertiesPalette_Image::handleLocalRotation()
 	if (m_haveDoc && m_haveItem)
 	{
 		m_doc->itemSelection_SetImageRotation(360 - imageRotation->value());
+		if (frameScale->isChecked())
+		{
+			m_item->adjustPictScale();
+			m_item->update();
+		}
+	}
+}
+
+void PropertiesPalette_Image::handleLocalSkew()
+{
+	if (!m_ScMW || m_ScMW->scriptIsRunning())
+		return;
+	if (m_haveDoc && m_haveItem)
+	{
+		m_doc->itemSelection_SetImageSkew(360 - imageSkewX->value(), 360 - imageSkewY->value());
 		if (frameScale->isChecked())
 		{
 			m_item->adjustPictScale();
@@ -855,6 +919,8 @@ void PropertiesPalette_Image::localeChange()
 	imageXOffsetSpinBox->setLocale(l);
 	imageYOffsetSpinBox->setLocale(l);
 	imageRotation->setLocale(l);
+	imageSkewX->setLocale(l);
+	imageSkewY->setLocale(l);
 	imgDpiX->setLocale(l);
 	imgDpiY->setLocale(l);
 }
