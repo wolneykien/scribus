@@ -550,8 +550,8 @@ void PropertiesPalette_Image::setCurrentItem(PageItem *item)
 		imageXOffsetSpinBox->blockSignals(false);
 		imageYOffsetSpinBox->blockSignals(false);
 		imageRotation->blockSignals(false);
-		imageRotationX->blockSignals(false);
-		imageRotationY->blockSignals(false);
+		imageSkewX->blockSignals(false);
+		imageSkewY->blockSignals(false);
 	}
 	m_haveItem = true;
 
