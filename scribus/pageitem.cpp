@@ -10089,7 +10089,7 @@ void PageItem::moveImageInFrame(double newX, double newY)
 		QTransform cl;
 		cl.translate(imageXOffset() * imageXScale(), imageYOffset() * imageYScale());
 		cl.rotate(imageRotation());
-        cl.shear(imageSkewX, imageSkewY);
+		cl.shear(imageSkewX(), imageSkewY());
 		cl.scale(imageXScale(), imageYScale());
 		imageClip.map(cl);
 	}
