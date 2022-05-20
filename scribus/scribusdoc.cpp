@@ -11758,6 +11758,38 @@ void ScribusDoc::itemSelection_SetImageRotation(double rot, Selection* customSel
 	changed();
 }
 
+void ScribusDoc::itemSelection_SetImageSkew(double skewX, double skewY, Selection* customSelection)
+{
+	Selection* itemSelection = (customSelection != nullptr) ? customSelection : m_Selection;
+	assert(itemSelection != nullptr);
+	int selectedItemCount = itemSelection->count();
+	if (selectedItemCount == 0)
+		return;
+
+	UndoTransaction trans;
+	if (UndoManager::undoEnabled())
+		trans = m_undoManager->beginTransaction(Um::Selection,Um::IImageFrame,Um::Rotate,"",Um::IRotate);
+	for (int i = 0; i < selectedItemCount; ++i)
+	{
+		PageItem *currItem = itemSelection->itemAt(i);
+		currItem->setImageSkew(skewX, skewY);
+		if (!currItem->imageClip.empty())
+		{
+			currItem->imageClip = currItem->pixm.imgInfo.PDSpathData[currItem->pixm.imgInfo.usedPath].copy();
+			QTransform cl;
+			cl.translate(currItem->imageXOffset()*currItem->imageXScale(), currItem->imageYOffset()*currItem->imageYScale());
+			cl.rotate(currItem->imageRotation());
+			cl.shear(currItem->imageSkewX(), currItem->imageSkewY());
+			cl.scale(currItem->imageXScale(), currItem->imageYScale());
+			currItem->imageClip.map(cl);
+		}
+		currItem->update();
+	}
+	if (trans)
+		trans.commit();
+	changed();
+}
+
 void ScribusDoc::buildAlignItemList(Selection* customSelection)
 {
 	Q_UNUSED(customSelection);

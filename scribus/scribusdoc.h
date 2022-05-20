@@ -1548,6 +1548,7 @@ public slots:
 	void itemSelection_SetImageScale(double x, double y, Selection* customSelection = nullptr);
 	void itemSelection_SetImageScaleAndOffset(double ox, double oy, double sx, double sy, Selection* customSelection = nullptr);
 	void itemSelection_SetImageRotation(double rot, Selection* customSelection = nullptr);
+	void itemSelection_SetImageSkew(double skewX, double skewY, Selection* customSelection = nullptr);
 	void itemSelection_AlignItemLeft(int i, double newX, ScribusDoc::AlignMethod how);
 	void itemSelection_AlignItemRight(int i, double newX, ScribusDoc::AlignMethod how);
 	void itemSelection_AlignItemTop(int i, double newY, ScribusDoc::AlignMethod how);
