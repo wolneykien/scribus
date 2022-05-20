@@ -48,6 +48,8 @@ struct CopyContentsBuffer
 	double LocalX;
 	double LocalY;
 	double LocalRot;
+	double LocalSkewX;
+	double LocalSkewY;
 	double ItemX;
 	double ItemY;
 	ScImageEffectList effects;
