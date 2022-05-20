@@ -379,6 +379,7 @@ public:
 	static QString RenameMasterPage;
 	static QString Resize;
 	static QString Rotate;
+	static QString Skew;
 	static QString MoveFromTo;
 	static QString ResizeFromTo;
 	static QString ImageOffset;
@@ -645,6 +646,7 @@ public:
 	static QPixmap *IMove;
 	static QPixmap *IResize;
 	static QPixmap *IRotate;
+	static QPixmap *ISkew;
 	static QPixmap *IGuides;
 	static QPixmap *ILockGuides;
 	static QPixmap *IAlignDistribute;
