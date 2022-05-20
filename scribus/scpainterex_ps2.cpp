@@ -173,6 +173,11 @@ void ScPainterEx_Ps2::rotate( double r )
 	m_matrix.rotate(r);
 }
 
+void ScPainterEx_Ps2::shear( double rx, double ry )
+{
+	m_matrix.shear(rx, ry);
+}
+
 void ScPainterEx_Ps2::scale( double x, double y )
 {
 	m_matrix.scale(x, y);

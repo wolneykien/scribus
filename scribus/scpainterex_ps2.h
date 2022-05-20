@@ -93,6 +93,7 @@ public:
 	void translate( double, double ) override;
 	void translate( const QPointF& offset ) override;
 	void rotate( double ) override;
+	void shear( double, double ) override;
 	void scale( double, double ) override;
 
 	// drawing
