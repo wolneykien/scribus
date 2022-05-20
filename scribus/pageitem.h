@@ -1604,6 +1604,7 @@ protected: // Start protected functions
 	void restoreImageNbr(SimpleState *state,bool isUndo);
 	void restoreImageOffsetChange(SimpleState *state, bool isUndo);
 	void restoreImageRotation(SimpleState *state, bool isUndo);
+	void restoreImageSkew(SimpleState *state, bool isUndo);
 	void restoreImageScaleChange(SimpleState *state, bool isUndo);
 	void restoreImageScaleMode(SimpleState *state, bool isUndo);
 	void restoreInsertFrameText(SimpleState *state, bool isUndo);

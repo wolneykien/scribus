@@ -4772,6 +4772,8 @@ void PageItem::restore(UndoState *state, bool isUndo)
 				restoreStartArrowScale(ss, isUndo);
 			else if (ss->contains("IMAGE_ROTATION"))
 				restoreImageRotation(ss, isUndo);
+			else if (ss->contains("IMAGE_SKEW"))
+				restoreImageSkew(ss, isUndo);
 			else if (ss->contains("ITEM_RESIZE"))
 				restoreResize(ss, isUndo);
 			else if (ss->contains("ITEM_ROTATE"))
