@@ -55,6 +55,7 @@ public:
 	virtual void translate(double, double);
 	virtual void translate(const QPointF& offset);
 	virtual void rotate(double);
+	virtual void shear(double, double);
 	virtual void scale(double, double);
 
 	// drawing

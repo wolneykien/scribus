@@ -214,6 +214,16 @@ void ScPainter::rotate(double r)
 	cairo_rotate (m_cr, r * 3.1415927 / 180.0);
 }
 
+void ScPainter::shear(double rx, double ry)
+{
+	cairo_matrix_t mtx;
+	cairo_matrix_init (&mtx,
+		1.0, rx,
+		ry, 1.0,
+		0.0, 0.0);
+	cairo_transform (m_cr, &mtx);
+}
+
 void ScPainter::scale(double x, double y)
 {
 	cairo_scale (m_cr, x, y);
