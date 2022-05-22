@@ -751,7 +751,7 @@ void XPSExPlug::processImageItem(double xOffset, double yOffset, PageItem *item,
 			mpx.scale(1, -1);
 		}
 		mpx.rotate(item->imageRotation());
-        mpx.shear(item->imageSkewX(), item->imageSkewY());
+		mpx.shear(tan(item->imageSkewX()), tan(item->imageSkewY()));
 		gr.setAttribute("Transform", MatrixToStr(mpx));
 		gr.setAttribute("ImageSource", "/Resources/Images/" + QString("%1.png").arg(imageCounter));
 		QDomElement rel = r_docu.createElement("Relationship");
