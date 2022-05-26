@@ -3202,7 +3202,7 @@ void PageItem_TextFrame::DrawObj_Item(ScPainter *p, const QRectF& cullingArea)
 				p->scale(m_imageXScale, m_imageYScale);
 				p->translate(m_imageXOffset*m_imageXScale, m_imageYOffset*m_imageYScale);
 				p->rotate(m_imageRotation);
-				p->shear(tan(m_imageSkewX), tan(m_imageSkewY));
+				p->shear(tan(M_PI / 180.0 * m_imageSkewX), tan(M_PI / 180.0 * m_imageSkewY));
 				if (pixm.width() > 0 && pixm.height() > 0)
 					p->drawImage(pixm.qImagePtr());
 				p->restore();//RE2

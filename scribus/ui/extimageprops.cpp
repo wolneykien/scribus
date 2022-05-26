@@ -334,7 +334,7 @@ void ExtImageProps::leaveOK()
 			QTransform cl;
 			cl.translate(m_item->imageXOffset()*m_item->imageXScale(), m_item->imageYOffset()*m_item->imageYScale());
 			cl.rotate(m_item->imageRotation());
-			cl.shear(tan(m_item->imageSkewX()), tan(m_item->imageSkewY()));
+			cl.shear(tan(M_PI / 180.0 * m_item->imageSkewX()), tan(M_PI / 180.0 * m_item->imageSkewY()));
 			cl.scale(m_item->imageXScale(), m_item->imageYScale());
 			m_item->imageClip.map(cl);
 		}
@@ -375,7 +375,7 @@ void ExtImageProps::changePreview()
 				QTransform cl;
 				cl.translate(m_item->imageXOffset()*m_item->imageXScale(), m_item->imageYOffset()*m_item->imageYScale());
 				cl.rotate(m_item->imageRotation());
-				cl.shear(tan(m_item->imageSkewX()), tan(m_item->imageSkewY()));
+				cl.shear(tan(M_PI / 180.0 * m_item->imageSkewX()), tan(M_PI / 180.0 * m_item->imageSkewY()));
 				cl.scale(m_item->imageXScale(), m_item->imageYScale());
 				m_item->imageClip.map(cl);
 			}
@@ -500,7 +500,7 @@ void ExtImageProps::selPath(QListWidgetItem *c)
 		QTransform cl;
 		cl.translate(m_item->imageXOffset()*m_item->imageXScale(), m_item->imageYOffset()*m_item->imageYScale());
 		cl.rotate(m_item->imageRotation());
-		cl.shear(tan(m_item->imageSkewX()), tan(m_item->imageSkewY()));
+		cl.shear(tan(M_PI / 180.0 * m_item->imageSkewX()), tan(M_PI / 180.0 * m_item->imageSkewY()));
 		cl.scale(m_item->imageXScale(), m_item->imageYScale());
 		m_item->imageClip.map(cl);
 		m_item->update();

@@ -9635,7 +9635,7 @@ void PageItem::adjustPictScale()
 		QRectF br(0, 0, OrigW, OrigH);
 		QTransform m;
 		m.rotate(m_imageRotation);
-		m.shear(tan(m_imageSkewX), tan(m_imageSkewY));
+		m.shear(tan(M_PI / 180.0 * m_imageSkewX), tan(M_PI / 180.0 * m_imageSkewY));
 		br = m.mapRect(br);
 		xs = m_width / br.width();
 		ys = m_height / br.height();
@@ -9646,7 +9646,7 @@ void PageItem::adjustPictScale()
 		QTransform mm;
 		mm.scale(xs2, ys2);
 		mm.rotate(-m_imageRotation);
-		mm.shear(-tan(m_imageSkewX), -tan(m_imageSkewY));
+		mm.shear(-tan(M_PI / 180.0 * m_imageSkewX), -tan(M_PI / 180.0 * m_imageSkewY));
 		hL = mm.map(hL);
 		wL = mm.map(wL);
 		xs = wL.length() / static_cast<double>(OrigW);
@@ -9668,7 +9668,7 @@ void PageItem::adjustPictScale()
 		QTransform m;
 		m.scale(1.0 / xs, 1.0 / ys);
 		m.rotate(m_imageRotation);
-		m.shear(tan(m_imageSkewX), tan(m_imageSkewY));
+		m.shear(tan(M_PI / 180.0 * m_imageSkewX), tan(M_PI / 180.0 * m_imageSkewY));
 		br = m.mapRect(br);
 		m_imageXOffset = -br.x();
 		m_imageYOffset = -br.y();
@@ -10089,7 +10089,7 @@ void PageItem::moveImageInFrame(double newX, double newY)
 		QTransform cl;
 		cl.translate(imageXOffset() * imageXScale(), imageYOffset() * imageYScale());
 		cl.rotate(imageRotation());
-		cl.shear(tan(imageSkewX()), tan(imageSkewY()));
+		cl.shear(tan(M_PI / 180.0 * imageSkewX()), tan(M_PI / 180.0 * imageSkewY()));
 		cl.scale(imageXScale(), imageYScale());
 		imageClip.map(cl);
 	}

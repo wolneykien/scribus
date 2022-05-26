@@ -218,7 +218,7 @@ void CanvasMode_Edit::drawControls(QPainter* p)
 			}
 			p->translate(currItem->imageXOffset()*currItem->imageXScale(), currItem->imageYOffset()*currItem->imageYScale());
 			p->rotate(currItem->imageRotation());
-			p->shear(tan(currItem->imageSkewX()), tan(currItem->imageSkewY()));
+			p->shear(tan(M_PI / 180.0 * currItem->imageSkewX()), tan(M_PI / 180.0 * currItem->imageSkewY()));
 			p->drawRect(0, 0, currItem->OrigW*currItem->imageXScale(), currItem->OrigH*currItem->imageYScale());
 			p->translate(currItem->OrigW*currItem->imageXScale() / 2, currItem->OrigH*currItem->imageYScale() / 2);
 			p->scale(1.0 / m_canvas->scale(), 1.0 / m_canvas->scale());

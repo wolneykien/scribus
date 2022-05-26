@@ -6172,7 +6172,7 @@ QByteArray PDFLibCore::PDF_TransparenzFill(PageItem *currItem)
 			{
 				mpa.translate(currItem->imageXOffset() * currItem->imageXScale(), -currItem->imageYOffset() * currItem->imageYScale());
 				mpa.rotate(-currItem->imageRotation());
-				mpa.shear(-tan(currItem->imageSkewX()), -tan(currItem->imageSkewY()));
+				mpa.shear(-tan(M_PI / 180.0 * currItem->imageSkewX()), -tan(M_PI / 180.0 * currItem->imageSkewY()));
 			}
 		}
 		// #11761 : cause trouble when exporting transparency gradient
@@ -6625,7 +6625,7 @@ bool PDFLibCore::PDF_PatternFillStroke(QByteArray& output, PageItem *currItem, i
 	{
 		mpa.translate(currItem->imageXOffset() * currItem->imageXScale(), -currItem->imageYOffset() * currItem->imageYScale());
 		mpa.rotate(-currItem->imageRotation());
-		mpa.shear(-tan(currItem->imageSkewX()), -tan(currItem->imageSkewY()));
+		mpa.shear(-tan(M_PI / 180.0 * currItem->imageSkewX()), -tan(M_PI / 180.0 * currItem->imageSkewY()));
 	}
 	mpa.translate(patternOffsetX, -patternOffsetY);
 	if (currItem->itemType() == PageItem::Symbol)
@@ -10839,7 +10839,7 @@ bool PDFLibCore::PDF_Image(PageItem* item, const QString& fn, double sx, double 
 			embedPre += "1 0 0 1 " + FToStr(x*sx) + " " + FToStr(-ImInfo.Height * ImInfo.sya + y * sy) + " cm\n";
 			QTransform mpa;
 			mpa.rotate(-item->imageRotation());
-			mpa.shear(-tan(item->imageSkewX()), -tan(item->imageSkewY()));
+			mpa.shear(-tan(M_PI / 180.0 * item->imageSkewX()), -tan(M_PI / 180.0 * item->imageSkewY()));
 			embedPre += "1 0 0 1 0 " + FToStr(ImInfo.Height * ImInfo.sya) + " cm\n";
 			embedPre += FToStr(mpa.m11()) + " " + FToStr(mpa.m12()) + " " + FToStr(mpa.m21()) + " " + FToStr(mpa.m22()) + " 0 0 cm\n";
 			embedPre += "1 0 0 1 0 " + FToStr(-ImInfo.Height * ImInfo.sya) + " cm\n";

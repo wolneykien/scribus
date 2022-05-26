@@ -1101,7 +1101,7 @@ QDomElement SVGExPlug::processImageItem(PageItem *item, const QString& trans, co
 			mpa.scale(1, -1);
 		}
 		mpa.rotate(item->imageRotation());
-		mpa.shear(tan(item->imageSkewX()), tan(item->imageSkewY()));
+		mpa.shear(tan(M_PI / 180.0 * item->imageSkewX()), tan(M_PI / 180.0 * item->imageSkewY()));
 		ob3.setAttribute("transform", matrixToStr(mpa));
 		ob6.appendChild(ob3);
 		ob.appendChild(ob6);

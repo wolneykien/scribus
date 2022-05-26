@@ -792,7 +792,7 @@ void ScPageOutput::drawItem_ImageFrame(PageItem_ImageFrame* item, ScPainterExBas
 		}
 		painter->translate(item->imageXOffset() * item->imageXScale(), item->imageYOffset() * item->imageYScale());
 		painter->rotate(item->imageRotation());
-		painter->shear(tan(item->imageSkewX()), tan(item->imageSkewY()));
+		painter->shear(tan(M_PI / 180.0 * item->imageSkewX()), tan(M_PI / 180.0 * item->imageSkewY()));
 		painter->scale(imScaleX, imScaleY);
 		if (pImage->imgInfo.lowResType != 0)
 			painter->scale(pImage->imgInfo.lowResScale, pImage->imgInfo.lowResScale);
