@@ -11768,7 +11768,7 @@ void ScribusDoc::itemSelection_SetImageSkew(double skewX, double skewY, Selectio
 
 	UndoTransaction trans;
 	if (UndoManager::undoEnabled())
-		trans = m_undoManager->beginTransaction(Um::Selection,Um::IImageFrame,Um::Rotate,"",Um::IRotate);
+		trans = m_undoManager->beginTransaction(Um::Selection,Um::IImageFrame,Um::Skew,"",Um::ISkew);
 	for (int i = 0; i < selectedItemCount; ++i)
 	{
 		PageItem *currItem = itemSelection->itemAt(i);
