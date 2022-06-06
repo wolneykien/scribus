@@ -10839,7 +10839,7 @@ bool PDFLibCore::PDF_Image(PageItem* item, const QString& fn, double sx, double 
 			embedPre += "1 0 0 1 " + FToStr(x*sx) + " " + FToStr(-ImInfo.Height * ImInfo.sya + y * sy) + " cm\n";
 			QTransform mpa;
 			mpa.rotate(-item->imageRotation());
-			mpa.shear(-tan(M_PI / 180.0 * item->imageSkewX()), -tan(M_PI / 180.0 * item->imageSkewY()));
+			mpa.shear(-tan(M_PI / 180.0 * item->imageSkewY()), -tan(M_PI / 180.0 * item->imageSkewX()));
 			embedPre += "1 0 0 1 0 " + FToStr(ImInfo.Height * ImInfo.sya) + " cm\n";
 			embedPre += FToStr(mpa.m11()) + " " + FToStr(mpa.m12()) + " " + FToStr(mpa.m21()) + " " + FToStr(mpa.m22()) + " 0 0 cm\n";
 			embedPre += "1 0 0 1 0 " + FToStr(-ImInfo.Height * ImInfo.sya) + " cm\n";
