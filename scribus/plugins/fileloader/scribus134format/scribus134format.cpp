@@ -2614,6 +2614,8 @@ PageItem* Scribus134Format::pasteItem(ScribusDoc *doc, ScXmlStreamAttributes& at
 		currItem->setImageXYScale(scx, scy);
 		currItem->setImageXYOffset(attrs.valueAsDouble("LOCALX"), attrs.valueAsDouble("LOCALY"));
 		currItem->setImageRotation(attrs.valueAsDouble("LOCALROT", 0));
+		currItem->setImageSkew(attrs.valueAsDouble("LOCALSKEWX", 0),
+                               attrs.valueAsDouble("LOCALSKEWY", 0));
 		if (!currItem->isLatexFrame())
 		{
 			bool inlineF = attrs.valueAsBool("isInlineImage", false);
@@ -2663,6 +2665,8 @@ PageItem* Scribus134Format::pasteItem(ScribusDoc *doc, ScXmlStreamAttributes& at
 		else
 			currItem->setImageXYScale(scx, scy);
 		currItem->setImageRotation(attrs.valueAsDouble("LOCALROT", 0));
+		currItem->setImageSkew(attrs.valueAsDouble("LOCALSKEWX", 0),
+                               attrs.valueAsDouble("LOCALSKEWY", 0));
 		clPath = attrs.valueAsString("ImageClip", "");
 		if (currItem->pixm.imgInfo.PDSpathData.contains(clPath))
 		{
@@ -2912,6 +2916,8 @@ PageItem* Scribus134Format::pasteItem(ScribusDoc *doc, ScXmlStreamAttributes& at
 			currItem->setImageXYScale(scx, scy);
 			currItem->setImageXYOffset(attrs.valueAsDouble("LOCALX"), attrs.valueAsDouble("LOCALY"));
 			currItem->setImageRotation(attrs.valueAsDouble("LOCALROT", 0));
+            currItem->setImageSkew(attrs.valueAsDouble("LOCALSKEWX", 0),
+                                   attrs.valueAsDouble("LOCALSKEWY", 0));
 			currItem->Pfile  = Relative2Path(attrs.valueAsString("PFILE" , ""), baseDir);
 			currItem->Pfile2 = Relative2Path(attrs.valueAsString("PFILE2", ""), baseDir);
 			currItem->Pfile3 = Relative2Path(attrs.valueAsString("PFILE3", ""), baseDir);

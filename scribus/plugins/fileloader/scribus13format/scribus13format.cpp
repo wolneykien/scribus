@@ -1490,6 +1490,8 @@ PageItem* Scribus13Format::PasteItem(QDomElement *obj, ScribusDoc *doc, const QS
 	double scx = ScCLocale::toDoubleC(obj->attribute("LOCALSCX"));
 	double scy = ScCLocale::toDoubleC(obj->attribute("LOCALSCY"));
 	double rot = ScCLocale::toDoubleC(obj->attribute("LOCALROT"));
+	double skX = ScCLocale::toDoubleC(obj->attribute("LOCALSKEWX"));
+	double skY = ScCLocale::toDoubleC(obj->attribute("LOCALSKEWY"));
 	QString Pcolor = obj->attribute("PCOLOR");
 	if (Pcolor.isEmpty())
 		Pcolor = "None";
@@ -1527,6 +1529,7 @@ PageItem* Scribus13Format::PasteItem(QDomElement *obj, ScribusDoc *doc, const QS
 		currItem->setImageXYScale(scx, scy);
 		currItem->setImageXYOffset(offsX, offsY);
 		currItem->setImageRotation(rot);
+		currItem->setImageSkew(skX, skY);
 		currItem->Pfile = Relative2Path(obj->attribute("PFILE"), baseDir);
 		currItem->Pfile = QDir::fromNativeSeparators(currItem->Pfile);
 		currItem->ImageProfile = obj->attribute("PRFILE","");

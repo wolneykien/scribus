@@ -5281,6 +5281,8 @@ PageItem* Scribus150Format::pasteItem(ScribusDoc *doc, ScXmlStreamAttributes& at
 		currItem->setImageXYScale(imageXScale, imageYScale);
 		currItem->setImageXYOffset(imageXOffset, imageYOffset);
 		currItem->setImageRotation(attrs.valueAsDouble("LOCALROT"));
+		currItem->setImageSkew(attrs.valueAsDouble("LOCALSKEWX"),
+                               attrs.valueAsDouble("LOCALSKEWY"));
 //		if (!currItem->isLatexFrame())
 #ifdef HAVE_OSG
 		if ((currItem->isImageFrame() || currItem->isOSGFrame()) && (!currItem->isLatexFrame()))
@@ -5342,6 +5344,8 @@ PageItem* Scribus150Format::pasteItem(ScribusDoc *doc, ScXmlStreamAttributes& at
 			currItem->CompressionQualityIndex = attrs.valueAsInt("COMPRESSIONQUALITY");
 		currItem->setImageXYScale(imageXScale, imageYScale);
 		currItem->setImageRotation(attrs.valueAsDouble("LOCALROT"));
+		currItem->setImageSkew(attrs.valueAsDouble("LOCALSKEWX"),
+                               attrs.valueAsDouble("LOCALSKEWY"));
 		clPath = attrs.valueAsString("ImageClip", "");
 		if (!clPath.isEmpty())
 		{
@@ -5665,6 +5669,8 @@ PageItem* Scribus150Format::pasteItem(ScribusDoc *doc, ScXmlStreamAttributes& at
 			currItem->setImageXYScale(imageXScale, imageYScale);
 			currItem->setImageXYOffset(imageXOffset, imageYOffset);
 			currItem->setImageRotation(attrs.valueAsDouble("LOCALROT"));
+            currItem->setImageSkew(attrs.valueAsDouble("LOCALSKEWX"),
+                                   attrs.valueAsDouble("LOCALSKEWY"));
 			currItem->Pfile  = Relative2Path(attrs.valueAsString("PFILE" , ""), baseDir);
 			currItem->Pfile2 = Relative2Path(attrs.valueAsString("PFILE2", ""), baseDir);
 			currItem->Pfile3 = Relative2Path(attrs.valueAsString("PFILE3", ""), baseDir);
