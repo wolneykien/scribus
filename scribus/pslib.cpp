@@ -1298,7 +1298,8 @@ bool PSLib::PS_image(PageItem *item, double x, double y, const QString& fn, doub
 			int h = item->pixm.height();
 			PutStream("0 " + ToStr(h*scaley) + " tr\n");
 			PutStream(ToStr(-item->imageRotation()) + " ro\n");
-            PutStream("[1 " + ToStr(-tan(M_PI / 180.0 * item->imageSkewX())) + " " + ToStr(-tan(M_PI / 180.0 * item->imageSkewY())) + " 1 0 0] concat\n");
+            PutStream("[1 " + ((item->imageSkewX() != 0.0 && item->imageSkewX() != 360.0) ? ToStr(-tan(M_PI / 180.0 * item->imageSkewX())) : "0.0") + " " +
+                      ((item->imageSkewY() != 0.0 && item->imageSkewY() != 360.0) ? ToStr(-tan(M_PI / 180.0 * item->imageSkewY())) : "0.0") + " 1 0 0] concat\n");
 			PutStream("0 " + ToStr(-h*scaley) + " tr\n");
 			if (!Name.isEmpty())
 			{
@@ -1352,7 +1353,8 @@ bool PSLib::PS_image(PageItem *item, double x, double y, const QString& fn, doub
 	PutStream(ToStr(x*scalex) + " " + ToStr(y*scaley) + " tr\n");
 	PutStream("0 " + ToStr(h*scaley) + " tr\n");
 	PutStream(ToStr(-item->imageRotation()) + " ro\n");
-    PutStream("[1 " + ToStr(-tan(M_PI / 180.0 * item->imageSkewX())) + " " + ToStr(-tan(M_PI / 180.0 * item->imageSkewY())) + " 1 0 0] concat\n");
+    PutStream("[1 " + ((item->imageSkewX() != 0.0 && item->imageSkewX() != 360.0) ? ToStr(-tan(M_PI / 180.0 * item->imageSkewX())) : "0.0") + " " +
+              ((item->imageSkewY() != 0.0 && item->imageSkewY() != 360.0) ? ToStr(-tan(M_PI / 180.0 * item->imageSkewY())) : "0.0") + " 1 0 0] concat\n");
 	PutStream("0 " + ToStr(-h*scaley) + " tr\n");
 	if ((extensionIndicatesPDF(ext)) && (!item->isLatexFrame()))
 	{
